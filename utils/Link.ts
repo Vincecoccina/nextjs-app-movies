@@ -1,15 +1,19 @@
+import { Film, Popcorn, ChevronRightSquare } from "lucide-react"
 
 export const LINKS = [
     {
         name : "Films",
-        link : "/"
+        link : "/",
+        icon: {Film}
     },
     {
         name : "Nouveautés",
-        link : "/"
+        link : "/",
+        icon: {Film}
     },
     {
         name : "Prochainement",
-        link : "/"
+        link : "/",
+        icon: {Film}
     }
 ] 

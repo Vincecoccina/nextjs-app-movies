@@ -6,7 +6,7 @@ type Props = {
   };
 };
 
-export default function singleMoviePage({ params }: Props) {
+export default function categoryPage({ params }: Props) {
   const { slug } = params;
   
   return (

@@ -15,17 +15,11 @@ export default function Navbar() {
             <ResponsiveMenu />
             <Link href="/">
               <h1 className="text-2xl font-bold text-black dark:text-white">
-                RareFilm
+                Uncut
               </h1>
             </Link>
-            <ul className="hidden md:flex items-center gap-2 font-bold text-gray-800 dark:text-slate-500">
-              {LINKS.map((link, i) => (
-                <Link href={link.link} key={i} className="hover:text-black dark:hover:text-slate-300">
-                  {link.name}
-                </Link>
-              ))}
-            </ul>
           </div>
+          
           <div className="flex items-center gap-3">
             <ToggleTheme />
             <ProfileButton />
