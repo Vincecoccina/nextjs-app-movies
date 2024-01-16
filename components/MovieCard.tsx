@@ -13,15 +13,15 @@ type Props = {
 
 export default function PostCard({ movie }: Props) {
   return (
-    <Link href="/">
+    <Link href={`movies/${movie.slug}`}>
       <Card className="flex flex-col justify-between rounded-lg border-2 h-[100%]">
         <CardHeader>
-          <div className="aspect-square relative overflow-hidden">
+          <div className="rounded-lg aspect-square relative overflow-hidden">
             <Image
               src={movie.cover || "/img/bg.jpg"}
               fill
               alt={movie.title}
-              className="rounded-lg aspect-square object-cover transition-all duration-300 hover:scale-110"
+              className="rounded-lg aspect-square object-cover transition-all duration-700 hover:scale-110"
             />
           </div>
           <p className="font-semibold">{movie.title}</p>
