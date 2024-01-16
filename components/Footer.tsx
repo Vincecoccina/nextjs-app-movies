@@ -8,7 +8,7 @@ export default function Footer() {
       <PageContainer>
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-bold text-black dark:text-white">
-            Next Blog
+            Uncut
           </h1>
         </div>
       </PageContainer>
