@@ -34,7 +34,7 @@ export default function PostCard({ movie }: Props) {
                 : movie.warning === "Interdit aux moins de 12 ans"
                 ? "bg-orange-600"
                 : "bg-green-600"
-            } text-white text-[12px]`}
+            } text-white text-[8px] xl:text-[12px]`}
           >
             {movie.warning}
           </Badge>

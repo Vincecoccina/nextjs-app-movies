@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { Download, Eye, MessageCircle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import type { Metadata } from 'next'
 
 const getData = async (slug: string) => {
   const res = await fetch(`${process.env.URL}/api/movies/${slug}`, {
@@ -11,6 +12,18 @@ const getData = async (slug: string) => {
 
   return res.json();
 };
+
+export async function generateMetadata({ params }: { params: { slug: string } }) {
+  const { slug } = params;
+  const movie = await getData(slug);
+
+  return {
+    title: `Uncut - téléchargez ${movie.title} (${movie.year})`,
+    description: movie.synopsis
+    }
+}
+
+
 
 const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
   const { slug } = params;
