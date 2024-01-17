@@ -1,3 +1,4 @@
+import { Prisma } from "@prisma/client"
 
 export type Category = {
     id : number,
@@ -21,3 +22,7 @@ export type Movie = {
     nbComments: number,
     slug: string,
 }
+
+export type MovieWithCategory = Prisma.MovieGetPayload<{
+    include: {cat: true}
+}>
