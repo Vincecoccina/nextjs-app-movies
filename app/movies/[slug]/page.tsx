@@ -39,15 +39,15 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           }}
           className="rounded-lg aspect-square md:aspect-[3/1] overflow-hidden bg-cover bg-center"
         >
-          <div className="w-[90%] xl:w-[40%] h-[100%] px-[20px] py-0 flex flex-col justify-center gap-3 bg-gradient-to-r from-black to-transparent">
+          <div className="relative w-[90%] xl:w-[40%] h-[100%] px-[20px] py-0 flex flex-col justify-center gap-2 bg-gradient-to-r from-black to-transparent">
             <span className="text-[20px] sm:text-[30px] font-semibold uppercase text-white">
               {movie.catSlug}
             </span>
-            <h1 className="text-[30px] sm:text-[50px] font-semibold text-white capitalize">
+            <h1 className="text-[30px] sm:text-[50px] font-semibold text-white md:whitespace-nowrap capitalize">
               {movie.title}
             </h1>
             <Badge
-              className={`w-[70%] md:w-[40%] ${
+              className={`absolute top-[50%] mt-3 ${
                 movie.warning === "Interdit aux moins de 16 ans"
                   ? "bg-red-600"
                   : movie.warning === "Interdit aux moins de 12 ans"

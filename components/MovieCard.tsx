@@ -12,7 +12,7 @@ type Props = {
 
 export default function PostCard({ movie }: Props) {
   return (
-    <Link href={`movies/${movie.slug}`}>
+    <Link href={`/movies/${movie.slug}`}>
       <Card className="flex flex-col justify-between rounded-lg border-2 h-[100%]">
         <CardHeader>
           <div className="rounded-lg aspect-square relative overflow-hidden">
@@ -23,12 +23,12 @@ export default function PostCard({ movie }: Props) {
               className="rounded-lg aspect-square object-cover transition-all duration-700 hover:scale-110"
             />
           </div>
-          <p className="font-semibold capitalize">{movie.title}</p>
+          <p className="font-semibold  capitalize">{movie.title}</p>
         </CardHeader>
         <CardContent className="flex items-center justify-between">
           <Badge variant="outline">{movie.cat.title}</Badge>
           <Badge
-            className={`inline-flex items-center px-2 py-1 ${
+            className={` ${
               movie.warning === "Interdit aux moins de 16 ans"
                 ? "bg-red-600"
                 : movie.warning === "Interdit aux moins de 12 ans"

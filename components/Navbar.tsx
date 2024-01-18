@@ -1,13 +1,17 @@
-
+"use client";
 import React from "react";
 import PageContainer from "./PageContainer";
 import ProfileButton from "./ProfileButton";
 import ResponsiveMenu from "./ResponsiveMenu";
-import dynamic from 'next/dynamic';
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import dynamic from "next/dynamic";
 
-const ToggleTheme = dynamic(() => import('./ToggleTheme'), { ssr: false });
+const ToggleTheme = dynamic(() => import("./ToggleTheme"), { ssr: false });
 
 export default function Navbar() {
+  const { theme, setTheme } = useTheme();
+
   return (
     <header className="p-4 border-b">
       <PageContainer>
@@ -15,12 +19,16 @@ export default function Navbar() {
           <div className="flex items-center gap-5">
             <ResponsiveMenu />
             <a href="/">
-              <h1 className="text-2xl font-bold text-black dark:text-white">
-                Uncut
-              </h1>
+              <Image
+                src="/img/logo_noir.png"
+                alt="Uncut"
+                width={100}
+                height={50}
+                className="dark:invert"
+              />
             </a>
           </div>
-          
+
           <div className="flex items-center gap-3">
             <ToggleTheme />
             <ProfileButton />
