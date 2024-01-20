@@ -1,9 +1,12 @@
+"use client"
+
 import { Menu, Search } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "./ui/sheet";
 import Link from "next/link";
 import { Film, Popcorn, ChevronRightSquare, Settings } from "lucide-react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
+import { signOut } from "next-auth/react";
 
 export default function ResponsiveMenu() {
   return (
@@ -47,7 +50,6 @@ export default function ResponsiveMenu() {
               Paramètres
             </Link>
           </ul>
-          <Button variant="destructive">Se deconnecter</Button>
         </div>
       </SheetContent>
     </Sheet>

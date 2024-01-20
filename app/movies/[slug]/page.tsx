@@ -58,7 +58,7 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
               {movie.warning}
             </Badge>
             <div className="mt-[50px]">
-              <Button className="flex items-center gap-3 cursor-pointer">
+              <Button className="flex items-center gap-3 cursor-pointer bg-green-700 text-white">
                 <Download />
                 Télécharger
               </Button>

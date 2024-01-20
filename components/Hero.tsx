@@ -34,7 +34,7 @@ const Hero = async() => {
           {truncateText(movie.synopsis, 200)}
         </p>
         <div className="flex items-center gap-2">
-          <Button className="flex items-center gap-3 cursor-pointer">
+          <Button className="flex items-center gap-3 cursor-pointer bg-green-700 text-white">
             <Download />
             Télécharger
           </Button>

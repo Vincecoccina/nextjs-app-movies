@@ -4,13 +4,11 @@ import PageContainer from "./PageContainer";
 import ProfileButton from "./ProfileButton";
 import ResponsiveMenu from "./ResponsiveMenu";
 import Image from "next/image";
-import { useTheme } from "next-themes";
 import dynamic from "next/dynamic";
 
 const ToggleTheme = dynamic(() => import("./ToggleTheme"), { ssr: false });
 
 export default function Navbar() {
-  const { theme, setTheme } = useTheme();
 
   return (
     <header className="p-4 border-b">
