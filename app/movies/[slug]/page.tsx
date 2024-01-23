@@ -139,7 +139,7 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             )}
           </div>
         </section>
-        <Separator />
+        {movie.review && <Separator />}
         <section className="py-5">
           <div className="flex flex-col items-center lg:items-start lg:flex-row">
             {movie.review && <div className="flex-1 text-start py-5">
@@ -154,7 +154,7 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
               </p>
             </div>}
 
-            {movie.rate && <div className="mt-5 w-[100%] lg:w-[30%]">
+            {movie.review && <div className="mt-5 w-[100%] lg:w-[30%]">
               <div className="h-[50px] flex items center gap-3 mb-5">
                 <div className="h-[100] w-1 bg-blue-900"></div>
                 <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
@@ -167,9 +167,8 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             </div>}
           </div>
         </section>
-        <Separator />
         <section>
-          <MovieSuggest/>
+          <MovieSuggest movieSlug={slug}/>
         </section>
         <section>
           <Comments movieSlug={slug} />

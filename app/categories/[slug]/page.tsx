@@ -20,9 +20,12 @@ const categoryPage = ({ params }: Props) => {
       <title>{`Uncut - Catégorie ${formatSlug(slug)}`}</title>
       <PageContainer>
         <main className="py-10 px-4">
-          <h1 className="text-[30px] font-semibold text-black dark:text-slate-300 text-center capitalize">
-            {formatSlug(slug)}
-          </h1>
+          <div className="h-[50px] flex items center gap-3 mb-5">
+            <div className="h-[100] w-1 bg-blue-900"></div>
+            <h1 className="text-[30px] font-semibold text-black dark:text-slate-300 capitalize">
+              {formatSlug(slug)}
+            </h1>
+          </div>
           {!isFetching && <MovieList movies={movies} />}
         </main>
       </PageContainer>

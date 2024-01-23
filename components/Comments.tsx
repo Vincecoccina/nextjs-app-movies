@@ -13,6 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CommentWithUser } from "@/type";
 import { MessageCircle } from "lucide-react";
 
+
 export default function Comments({ movieSlug }: { movieSlug: string }) {
   const [content, setContent] = useState("");
   const { data: session, status } = useSession();
@@ -35,6 +36,7 @@ export default function Comments({ movieSlug }: { movieSlug: string }) {
 
   /* Get Comments */
   const { data: comments, isFetching } = useComments(movieSlug);
+  
 
   return (
     <div className="mt-10">
