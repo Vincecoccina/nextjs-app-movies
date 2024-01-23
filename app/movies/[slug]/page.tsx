@@ -4,6 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import { Download, Eye, MessageCircle, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Comments from "@/components/Comments";
+import SameMovie from "@/components/MovieSuggest";
+import MovieSuggest from "@/components/MovieSuggest";
 
 const getData = async (slug: string) => {
   const res = await fetch(`${process.env.URL}/api/movies/${slug}`, {
@@ -73,17 +75,20 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
         {/* INFOS SECTION */}
         <section>
           <div className="flex justify-between items-start p-3 mb-3">
-            <div className="flex flex-col justify-center gap-1">
+            <div className="flex flex-col justify-center gap-1 w-[80%] md:w-[50%]">
               <div className="h-[50px] flex items center gap-3 mb-3">
                 <div className="h-[100] w-1 bg-blue-900"></div>
                 <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
                   Infos
                 </h3>
               </div>
-              <div className="text-[#333] dark:text-slate-400 font-bold">
+              <div className="flex flex-col gap-3 text-[#333] dark:text-slate-400 font-bold">
                 <p>Année : <span className="text-blue-500 font-light">{movie.year}</span></p>
+                <Separator/>
                 <p>Pays : <span className="text-blue-500 font-light">{movie.country}</span></p>
+                <Separator/>
                 <p>De : <span className="text-blue-500 font-light">{movie.director}</span></p>
+                <Separator/>
                 <p>Avec : <span className="text-blue-500 font-light">{movie.casting}</span></p>
               </div>
             </div>
@@ -100,24 +105,24 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </section>
         <Separator />
-        <section className="mt-3 mb-5">
+        <section className="mt-3 mb-5 py-5">
           <div className="flex flex-col items-center lg:items-start lg:flex-row">
             <div className="flex-1 text-start">
-              <div className="h-[50px] flex items center gap-3 mb-3">
+              <div className="h-[50px] flex items center gap-3 mb-5">
                 <div className="h-[100] w-1 bg-blue-900"></div>
-                <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
+                <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                   Synopsis
                 </h3>
               </div>
-              <p className="text-[13px] md:text-[17px] text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
+              <p className="text-[13px] md:text-[17px] leading-7 text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
                 {movie.synopsis}
               </p>
             </div>
             {movie.trailer && (
-              <div className="mt-5 w-[100%] lg:w-[30%]">
-                <div className="h-[50px] flex items center gap-3 mb-3">
+              <div className="w-[100%] lg:w-[30%]">
+                <div className="h-[50px] flex items center gap-3 mb-5">
                   <div className="h-[100] w-1 bg-blue-900"></div>
-                  <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
+                  <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                     Bande Annonce
                   </h3>
                 </div>
@@ -135,36 +140,39 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           </div>
         </section>
         <Separator />
-        <section>
+        <section className="py-5">
           <div className="flex flex-col items-center lg:items-start lg:flex-row">
             {movie.review && <div className="flex-1 text-start py-5">
-              <div className="h-[50px] flex items center gap-3 mb-3">
+              <div className="h-[50px] flex items center gap-3 mb-5">
                 <div className="h-[100] w-1 bg-blue-900"></div>
-                <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
+                <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                   L'avis d'Uncut
                 </h3>
               </div>
-              <p className="text-[13px] md:text-[17px] text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
+              <p className="text-[13px] md:text-[17px] leading-7 text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
                 {movie.review}
               </p>
             </div>}
 
             {movie.rate && <div className="mt-5 w-[100%] lg:w-[30%]">
-              <div className="h-[50px] flex items center gap-3 mb-3">
+              <div className="h-[50px] flex items center gap-3 mb-5">
                 <div className="h-[100] w-1 bg-blue-900"></div>
-                <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
+                <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                   Note
                 </h3>
               </div>
-              <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px]">
-                <span className="text-[80px] text-[#333] font-light dark:text-slate-400">{`${movie.rate} / 10`}</span>
+              <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px] rounded-lg bg-slate-300">
+                <span className="text-[80px] text-[#333] font-light">{`${movie.rate} / 10`}</span>
               </div>
             </div>}
           </div>
         </section>
         <Separator />
         <section>
-          <Comments/>
+          <MovieSuggest/>
+        </section>
+        <section>
+          <Comments movieSlug={slug} />
         </section>
       </main>
     </PageContainer>

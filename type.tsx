@@ -26,3 +26,7 @@ export type Movie = {
 export type MovieWithCategory = Prisma.MovieGetPayload<{
     include: {cat: true}
 }>
+
+export type CommentWithUser = Prisma.CommentGetPayload<{
+    include: {user: true}
+}>

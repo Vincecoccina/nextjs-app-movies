@@ -43,14 +43,15 @@ model User {
   image         String?
   accounts      Account[]
   sessions      Session[]
+  Comment       Comment[]
 }
 
 model Movie {
-  id         String   @id @default(cuid())
-  createdAt  DateTime @default(now())
+  id         String    @id @default(cuid())
+  createdAt  DateTime  @default(now())
   title      String
-  slug       String   @unique
-  synopsis   String   @db.Text
+  slug       String    @unique
+  synopsis   String    @db.Text
   year       String
   country    String
   director   String
@@ -59,15 +60,16 @@ model Movie {
   heroImg    String?
   trailer    String?
   file       String?
-  review     String?  @db.Text
-  rate       Int?     @default(0)
-  nbViews    Int      @default(0)
-  nbComments Int      @default(0)
+  review     String?   @db.Text
+  rate       Int?      @default(0)
+  nbViews    Int       @default(0)
+  nbComments Int       @default(0)
   warning    String?
   catSlug    String
-  cat        Category @relation(fields: [catSlug], references: [slug])
-  visibility Int      @default(0)
-  featured   Int      @default(0)
+  cat        Category  @relation(fields: [catSlug], references: [slug])
+  visibility Int       @default(0)
+  featured   Int       @default(0)
+  Comment    Comment[]
 }
 
 model Category {
@@ -76,4 +78,18 @@ model Category {
   title  String
   image  String?
   movies Movie[]
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  createdAt DateTime @default(now())
+  content   String
+
+  //User
+  userEmail String
+  user      User   @relation(fields: [userEmail], references: [email])
+
+  //Movie
+  movieSlug String
+  movie     Movie  @relation(fields: [movieSlug], references: [slug])
 }
