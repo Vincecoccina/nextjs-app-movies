@@ -20,8 +20,8 @@ export default function Navbar() {
               <Image
                 src="/img/logo_noir.png"
                 alt="Uncut"
-                width={100}
-                height={50}
+                width={120}
+                height={70}
                 className="dark:invert"
               />
             </a>
