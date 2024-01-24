@@ -1,10 +1,20 @@
-"use client"
+
 import MovieList from "@/components/MovieList";
 import PageContainer from "@/components/PageContainer";
-import { useMovies } from "@/hooks/useMovies";
 
-export default function AllMovies() {
-    const { data: movies, isFetching } = useMovies(null, 'all');
+
+const getData = async () => {
+  const res = await fetch(`${process.env.URL}/api/movies`, {
+    cache: "no-store",
+  });
+
+  return res.json();
+};
+
+const AllMovies = async () => {
+
+  const movies = await getData();
+  
   return (
     <PageContainer>
       <main className="py-10 px-4">
@@ -14,8 +24,10 @@ export default function AllMovies() {
             Notre Catalogue
           </h1>
         </section>
-          <MovieList movies={movies} />
+        <MovieList movies={movies} />
       </main>
     </PageContainer>
   );
-}
+};
+
+export default AllMovies;
