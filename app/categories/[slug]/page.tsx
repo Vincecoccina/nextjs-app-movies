@@ -1,4 +1,4 @@
-"use client";
+
 import MovieList from "@/components/MovieList";
 import PageContainer from "@/components/PageContainer";
 import { useMovies } from "@/hooks/useMovies";
@@ -11,9 +11,17 @@ type Props = {
   };
 };
 
-const categoryPage = ({ params }: Props) => {
+const getData = async (slug : string) => {
+  const res = await fetch(`${process.env.URL}/api/movies?cat=${slug}`, {
+    cache: "no-store",
+  });
+
+  return res.json();
+};
+
+const categoryPage = async ({ params }: Props) => {
   const { slug } = params;
-  const { data: movies, isFetching } = useMovies(slug);
+  const movies = await getData(slug)
 
   return (
     <>
@@ -26,7 +34,7 @@ const categoryPage = ({ params }: Props) => {
               {formatSlug(slug)}
             </h1>
           </div>
-          {!isFetching && <MovieList movies={movies} />}
+          <MovieList movies={movies} />
         </main>
       </PageContainer>
     </>

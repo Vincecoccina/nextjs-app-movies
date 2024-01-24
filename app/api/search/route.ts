@@ -13,6 +13,8 @@ export const GET = async (req: Request) => {
           OR: [
             { title: { contains: searchTerm } },
             { country: { contains: searchTerm } },
+            { director: { contains: searchTerm } },
+            { casting: { contains: searchTerm } },
           ],
         };
       }

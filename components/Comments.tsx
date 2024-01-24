@@ -13,7 +13,6 @@ import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import { CommentWithUser } from "@/type";
 import { MessageCircle } from "lucide-react";
 
-
 export default function Comments({ movieSlug }: { movieSlug: string }) {
   const [content, setContent] = useState("");
   const { data: session, status } = useSession();
@@ -36,12 +35,11 @@ export default function Comments({ movieSlug }: { movieSlug: string }) {
 
   /* Get Comments */
   const { data: comments, isFetching } = useComments(movieSlug);
-  
 
   return (
     <div className="mt-10">
       <h3 className="flex items-center gap-3 text-[20px] font-bold text-black dark:text-slate-500 mb-3">
-        <MessageCircle/>
+        <MessageCircle />
         Commentaires
       </h3>
 
@@ -76,7 +74,11 @@ export default function Comments({ movieSlug }: { movieSlug: string }) {
 
       {/* COMMENTS LIST */}
       <div className="flex flex-col gap-3 bg-slate-300 py-4 px-4 rounded-lg">
-        <h4 className="text-slate-700 font-semibold">Derniers commentaires</h4>
+        <h4 className="text-slate-700 font-semibold">
+          {comments && comments.length != 0
+            ? "Derniers commentaires"
+            : "Soyez le premier à mettre un commentaire"}
+        </h4>
         {isFetching ? (
           <p>Chargements des commentaires</p>
         ) : (
