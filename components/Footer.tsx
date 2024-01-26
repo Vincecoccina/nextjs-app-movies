@@ -17,14 +17,8 @@ export default function Footer() {
               </span>{" "}
             </p>
           </div>
-          <a href="/" className="bg-green-500 rounded-full py-1 px-3">
-            <Image
-              src="/img/logo_noir.png"
-              alt="Uncut"
-              width={100}
-              height={50}
-              className="invert"
-            />
+          <a href="/">
+            <span className="text-[25px] font-bold">Uncut vidéo</span>
           </a>
         </div>
       </PageContainer>

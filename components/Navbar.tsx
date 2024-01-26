@@ -17,13 +17,7 @@ export default function Navbar() {
           <div className="flex items-center gap-5">
             <ResponsiveMenu />
             <a href="/">
-              <Image
-                src="/img/logo_noir.png"
-                alt="Uncut"
-                width={120}
-                height={70}
-                className="dark:invert"
-              />
+              <span className="text-[25px] font-bold">Uncut vidéo</span>
             </a>
           </div>
 
