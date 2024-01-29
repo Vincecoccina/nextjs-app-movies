@@ -4,8 +4,8 @@ import { Separator } from "@/components/ui/separator";
 import { Download, Eye, MessageCircle, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Comments from "@/components/Comments";
-import SameMovie from "@/components/MovieSuggest";
 import MovieSuggest from "@/components/MovieSuggest";
+
 
 const getData = async (slug: string) => {
   const res = await fetch(`${process.env.URL}/api/movies/${slug}`, {
@@ -44,7 +44,7 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           className="rounded-lg aspect-square md:aspect-[3/1] overflow-hidden bg-cover bg-center"
         >
           <div className="relative w-[90%] xl:w-[40%] h-[100%] px-[20px] py-0 flex flex-col justify-center gap-2 bg-gradient-to-r from-black to-transparent">
-            <span className="text-[20px] sm:text-[30px] font-semibold uppercase text-white">
+            <span className="text-[20px] sm:text-[30px] font-semibold uppercase text-white italic">
               {movie.catSlug}
             </span>
             <h1 className="text-[30px] sm:text-[50px] font-semibold text-white md:whitespace-nowrap capitalize">
@@ -83,13 +83,31 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
                 </h3>
               </div>
               <div className="flex flex-col gap-3 text-[#333] dark:text-slate-400 font-bold">
-                <p>Année : <span className="text-blue-500 font-light">{movie.year}</span></p>
-                <Separator/>
-                <p>Pays : <span className="text-blue-500 font-light">{movie.country}</span></p>
-                <Separator/>
-                <p>De : <span className="text-blue-500 font-light">{movie.director}</span></p>
-                <Separator/>
-                <p>Avec : <span className="text-blue-500 font-light">{movie.casting}</span></p>
+                <p>
+                  Année :{" "}
+                  <span className="text-blue-500 font-light">{movie.year}</span>
+                </p>
+                <Separator />
+                <p>
+                  Pays :{" "}
+                  <span className="text-blue-500 font-light">
+                    {movie.country}
+                  </span>
+                </p>
+                <Separator />
+                <p>
+                  De :{" "}
+                  <span className="text-blue-500 font-light">
+                    {movie.director}
+                  </span>
+                </p>
+                <Separator />
+                <p>
+                  Avec :{" "}
+                  <span className="text-blue-500 font-light">
+                    {movie.casting}
+                  </span>
+                </p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -142,33 +160,37 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
         {movie.review && <Separator />}
         <section className="py-5">
           <div className="flex flex-col items-center lg:items-start lg:flex-row">
-            {movie.review && <div className="flex-1 text-start py-5">
-              <div className="h-[50px] flex items center gap-3 mb-5">
-                <div className="h-[100] w-1 bg-blue-900"></div>
-                <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
-                  L'avis d'Uncut
-                </h3>
+            {movie.review && (
+              <div className="flex-1 text-start py-5">
+                <div className="h-[50px] flex items center gap-3 mb-5">
+                  <div className="h-[100] w-1 bg-blue-900"></div>
+                  <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
+                    L'avis d'Uncut
+                  </h3>
+                </div>
+                <p className="text-[13px] md:text-[17px] leading-7 text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
+                  {movie.review}
+                </p>
               </div>
-              <p className="text-[13px] md:text-[17px] leading-7 text-[#333] font-light dark:text-slate-400 w-[100%] md:w-[80%] mx-auto lg:mx-0">
-                {movie.review}
-              </p>
-            </div>}
+            )}
 
-            {movie.review && <div className="mt-5 w-[100%] lg:w-[30%]">
-              <div className="h-[50px] flex items center gap-3 mb-5">
-                <div className="h-[100] w-1 bg-blue-900"></div>
-                <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
-                  Note
-                </h3>
+            {movie.review && (
+              <div className="mt-5 w-[100%] lg:w-[30%]">
+                <div className="h-[50px] flex items center gap-3 mb-5">
+                  <div className="h-[100] w-1 bg-blue-900"></div>
+                  <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
+                    Note
+                  </h3>
+                </div>
+                <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px] rounded-lg bg-slate-300">
+                  <span className="text-[80px] text-[#333] font-light">{`${movie.rate} / 10`}</span>
+                </div>
               </div>
-              <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px] rounded-lg bg-slate-300">
-                <span className="text-[80px] text-[#333] font-light">{`${movie.rate} / 10`}</span>
-              </div>
-            </div>}
+            )}
           </div>
         </section>
         <section>
-          <MovieSuggest movieSlug={slug}/>
+          <MovieSuggest movieSlug={slug} />
         </section>
         <section>
           <Comments movieSlug={slug} />

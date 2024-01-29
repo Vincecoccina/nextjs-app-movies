@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function loginPage() {
   const { status } = useSession();
@@ -30,7 +31,7 @@ export default function loginPage() {
     e.preventDefault();
     if (!isLogin) {
       await registerUser();
-    }else{
+    } else {
       await loginUser();
     }
   };
@@ -38,25 +39,24 @@ export default function loginPage() {
   const loginUser = async () => {
     signIn("credentials", {
       ...data,
-      redirect: false
-    })
+      redirect: false,
+    });
     router.push("/");
-};
+  };
 
   const registerUser = async () => {
-    
-      if (data.password !== data.confirmPassword) return;
+    if (data.password !== data.confirmPassword) return;
 
-      const response = await fetch("/api/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({data})
-      });
-      const user = await response.json()
-      console.log(user)
-      setIsLogin(true)
+    const response = await fetch("/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ data }),
+    });
+    const user = await response.json();
+    console.log(user);
+    setIsLogin(true);
   };
 
   return (
@@ -65,7 +65,10 @@ export default function loginPage() {
         <h1 className="text-4xl font-semibold text-center mb-5">
           {isLogin ? "Login" : "Register"}
         </h1>
-        <form className="mx-auto flex flex-col gap-2" onSubmit={handleFormSubmit}>
+        <form
+          className="mx-auto flex flex-col gap-2"
+          onSubmit={handleFormSubmit}
+        >
           {!isLogin && (
             <div>
               <Input
@@ -102,21 +105,30 @@ export default function loginPage() {
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirmez votre mot de passe"
-                onChange={(e) => setData({ ...data, confirmPassword: e.target.value })}
+                onChange={(e) =>
+                  setData({ ...data, confirmPassword: e.target.value })
+                }
               />
             </div>
           )}
           <Button
             type="submit"
-            className="bg-blue-600 text-white font-semibold hover:bg-blue-400"
+            className="bg-blue-500 text-white font-semibold hover:bg-blue-400"
           >
             Valider
           </Button>
+          <div className="flex items-center justify-center text-[12px] gap-2 font-semibold">
+            <p>Mot de passe oublié ?</p>
+            <Link href="/resetPassword" className="text-blue-500">Cliquez-ici</Link>
+          </div>
         </form>
         {isLogin && (
           <>
-            <div className="text-center my-2">
-              <span>ou</span>
+            <div className="relative my-2 h-5">
+              <div className="absolute top-[50%] w-[100%] h-[1px] bg-slate-600 z-5"></div>
+              <p className="flex items-center justify-center w-[10%] h-full left-[50%] translate-x-[-50%] absolute bg-slate-950 z-10 text-center">
+                ou
+              </p>
             </div>
             <div className="flex flex-col gap-4 max-w-sm mx-auto">
               <Button
