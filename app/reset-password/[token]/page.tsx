@@ -90,7 +90,7 @@ export default function ResetPasswordPage({ params }: any) {
             <Input
               id="password"
               name="password"
-              type="password"
+              type={!passwordIsVisisle ? "password" : "text"}
               placeholder="Votre nouveau mot de passe"
               onChange={(e) => setPassword(e.target.value)}
             />
@@ -104,7 +104,7 @@ export default function ResetPasswordPage({ params }: any) {
             <Input
               id="confirmPassword"
               name="confirmPassword"
-              type="password"
+              type={!confirmPasswordIsVisisle ? "password" : "text"}
               placeholder="Confirmez votre nouveau mot de passe"
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
