@@ -63,7 +63,7 @@ export default function loginPage() {
     <PageContainer>
       <div className="p-10 w-[30%] mx-auto">
         <h1 className="text-4xl font-semibold text-center mb-5">
-          {isLogin ? "Login" : "Register"}
+          {isLogin ? "Connexion" : "Inscription"}
         </h1>
         <form
           className="mx-auto flex flex-col gap-2"
@@ -119,7 +119,9 @@ export default function loginPage() {
           </Button>
           <div className="flex items-center justify-center text-[12px] gap-2 font-semibold">
             <p>Mot de passe oublié ?</p>
-            <Link href="/resetPassword" className="text-blue-500">Cliquez-ici</Link>
+            <Link href="/resetPassword" className="text-blue-500">
+              Cliquez-ici
+            </Link>
           </div>
         </form>
         {isLogin && (
@@ -146,8 +148,7 @@ export default function loginPage() {
             </div>
           </>
         )}
-        <Separator className="my-5 mx-auto" />
-        <div onClick={() => setIsLogin((prev) => !prev)}>
+        <div onClick={() => setIsLogin((prev) => !prev)} className="my-3">
           <p className="text-[12px] text-center text-black dark:text-slate-300 cursor-pointer">
             {isLogin ? "Je n'ai pas de compte" : "J'ai déjà un compte"}
           </p>

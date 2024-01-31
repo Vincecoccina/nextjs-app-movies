@@ -21,15 +21,13 @@ export default function ResetPasswordPage() {
     await resetPass();
   };
 
-  const resetPass = async () => {
-    
-  };
+  const resetPass = async () => {};
 
   return (
     <PageContainer>
       <div className="p-10 w-[30%] mx-auto">
-        <h1 className="text-4xl font-semibold text-center mb-5">
-          Quelle est votre adresse e-mail ?
+        <h1 className="text-3xl font-semibold text-center mb-5">
+          Quel est votre e-mail ?
         </h1>
         <form
           className="mx-auto flex flex-col gap-2"
@@ -51,6 +49,17 @@ export default function ResetPasswordPage() {
             Valider
           </Button>
         </form>
+        <div className="relative my-2 h-5">
+          <div className="absolute top-[50%] w-[100%] h-[1px] bg-slate-600 z-5"></div>
+          <p className="flex items-center justify-center w-[10%] h-full left-[50%] translate-x-[-50%] absolute bg-slate-950 z-10 text-center">
+            ou
+          </p>
+        </div>
+        <div className="flex items-center justify-center text-[12px] gap-2 font-semibold">
+          <Link href="/login" className="text-blue-500">
+            Connectez-vous
+          </Link>
+        </div>
       </div>
     </PageContainer>
   );
