@@ -9,11 +9,15 @@ import { signIn, useSession } from "next-auth/react";
 import Image from "next/image";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import { Eye } from "lucide-react";
 
 export default function loginPage() {
   const { status } = useSession();
   const router = useRouter();
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
+  const [passwordIsVisisle, setPasswwordIsVisible] = useState(false);
+  const [confirmPasswordIsVisisle, setConfirmPasswwordIsVisible] =
+    useState(false);
   const [isLogin, setIsLogin] = useState(true);
   const [data, setData] = useState({
     name: "",
@@ -44,9 +48,9 @@ export default function loginPage() {
     });
     if (status === "authenticated") {
       router.push("/");
-    }else{
-      setError("Adresse mail ou mot de passe incorrect")
-      return
+    } else {
+      setError("Adresse mail ou mot de passe incorrect");
+      return;
     }
   };
 
@@ -94,25 +98,35 @@ export default function loginPage() {
               onChange={(e) => setData({ ...data, email: e.target.value })}
             />
           </div>
-          <div>
+          <div className="relative">
             <Input
               id="password"
               name="password"
-              type="password"
+              type={!passwordIsVisisle ? "password" : "text"}
               placeholder="Mot de passe"
               onChange={(e) => setData({ ...data, password: e.target.value })}
             />
+            <Eye
+              size={20}
+              className="absolute right-[-30px] top-[50%] translate-y-[-50%] text-gray-400 cursor-pointer"
+              onClick={() => setPasswwordIsVisible((prev) => !prev)}
+            />
           </div>
           {!isLogin && (
-            <div>
+            <div className="relative">
               <Input
                 id="confirmPassword"
                 name="confirmPassword"
-                type="password"
+                type={!confirmPasswordIsVisisle ? "password" : "text"}
                 placeholder="Confirmez votre mot de passe"
                 onChange={(e) =>
                   setData({ ...data, confirmPassword: e.target.value })
                 }
+              />
+              <Eye
+                size={20}
+                className="absolute right-[-30px] top-[50%] translate-y-[-50%] text-gray-400 cursor-pointer"
+                onClick={() => setConfirmPasswwordIsVisible((prev) => !prev)}
               />
             </div>
           )}
