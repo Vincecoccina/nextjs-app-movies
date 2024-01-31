@@ -7,8 +7,6 @@ export const POST = async (req: Request) => {
     const body = await req.json();
     const { name, email, password } = body.data;
     
-    console.log(body.data)
-
     if (!name || !email || !password) {
       return NextResponse.json(
         { error: "Tout les champs ne sont pas remplis" },

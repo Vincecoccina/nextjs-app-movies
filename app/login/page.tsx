@@ -13,6 +13,7 @@ import Link from "next/link";
 export default function loginPage() {
   const { status } = useSession();
   const router = useRouter();
+  const [error, setError] = useState("")
   const [isLogin, setIsLogin] = useState(true);
   const [data, setData] = useState({
     name: "",
@@ -41,7 +42,12 @@ export default function loginPage() {
       ...data,
       redirect: false,
     });
-    router.push("/");
+    if (status === "authenticated") {
+      router.push("/");
+    }else{
+      setError("Adresse mail ou mot de passe incorrect")
+      return
+    }
   };
 
   const registerUser = async () => {
@@ -55,7 +61,6 @@ export default function loginPage() {
       body: JSON.stringify({ data }),
     });
     const user = await response.json();
-    console.log(user);
     setIsLogin(true);
   };
 
@@ -117,9 +122,10 @@ export default function loginPage() {
           >
             Valider
           </Button>
+          {error != "" && <p className="text-red-500 text-center">{error}</p>}
           <div className="flex items-center justify-center text-[12px] gap-2 font-semibold">
             <p>Mot de passe oublié ?</p>
-            <Link href="/resetPassword" className="text-blue-500">
+            <Link href="/forget-password" className="text-blue-500">
               Cliquez-ici
             </Link>
           </div>

@@ -36,15 +36,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  name          String?
-  email         String?   @unique
-  emailVerified DateTime?
-  password      String?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
-  Comment       Comment[]
+  id                String    @id @default(cuid())
+  name              String?
+  email             String?   @unique
+  emailVerified     DateTime?
+  password          String?
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  Comment           Comment[]
+  resetToken        String?
+  resetTokenExpires DateTime?
 }
 
 model Movie {

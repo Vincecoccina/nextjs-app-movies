@@ -1,27 +1,51 @@
 "use client";
 
-import { SyntheticEvent, useState } from "react";
+import { useState } from "react";
 import PageContainer from "@/components/PageContainer";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 
-export default function ResetPasswordPage() {
+export default function ForgetPasswordPage() {
   const router = useRouter();
-  const [data, setData] = useState({
-    name: "",
-    email: "",
-    password: "",
-    confirmPassword: "",
-  });
+  const [error, setError] = useState("");
 
-  const handleFormSubmit = async (e: SyntheticEvent) => {
-    e.preventDefault();
-    await resetPass();
+  const isValidEmail = (email: string) => {
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+    return emailRegex.test(email);
   };
 
-  const resetPass = async () => {};
+  const handleSubmit = async (e: any) => {
+    e.preventDefault();
+    const email = e.target[0].value;
+  
+    if (!isValidEmail(email)) {
+      setError("Email invalide");
+      return;
+    }
+
+    try {
+      const response = await fetch("/api/forget-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+      });
+
+      if(response.status === 400){
+        setError("Cet Email n'existe pas")
+      }
+      if(response.status === 200){
+        setError("")
+        router.push("/login")
+      }
+
+    } catch (error) {
+      setError("Erreur, réessayer");
+    }
+  };
 
   return (
     <PageContainer>
@@ -29,19 +53,13 @@ export default function ResetPasswordPage() {
         <h1 className="text-3xl font-semibold text-center mb-5">
           Quel est votre e-mail ?
         </h1>
-        <form
-          className="mx-auto flex flex-col gap-2"
-          onSubmit={handleFormSubmit}
-        >
+        <form className="mx-auto flex flex-col gap-2" onSubmit={handleSubmit}>
           <div>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              placeholder="Email"
-              onChange={(e) => setData({ ...data, email: e.target.value })}
-            />
+            <Input id="email" name="email" type="email" placeholder="Email" />
           </div>
+          {error != "" && (
+            <p className="text-red-600 text-[16px] mb-4">{error}</p>
+          )}
           <Button
             type="submit"
             className="bg-blue-500 text-white font-semibold hover:bg-blue-400"
