@@ -5,6 +5,8 @@ import { Download, Eye, MessageCircle, Quote } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import Comments from "@/components/Comments";
 import MovieSuggest from "@/components/MovieSuggest";
+import DownloadButton from "@/components/DownloadButton";
+
 
 
 const getData = async (slug: string) => {
@@ -62,12 +64,7 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
               {movie.warning}
             </Badge>
             <div className="mt-[50px]">
-              <a href={movie.file} download>
-                <Button className="flex items-center gap-3 cursor-pointer bg-green-700 text-white">
-                  <Download />
-                  Télécharger
-                </Button>
-              </a>
+              <DownloadButton link={movie.file}/>
             </div>
           </div>
         </section>

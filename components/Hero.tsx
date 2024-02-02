@@ -4,6 +4,7 @@ import { Download, Info } from "lucide-react";
 import { useFeatured } from "@/hooks/useFeatured";
 import { truncateText } from "@/utils/TruncateText";
 import Link from "next/link";
+import DownloadButton from "@/components/DownloadButton";
 
 const getData = async () => {
   const res = await fetch(`${process.env.URL}/api/movies/featured`, {
@@ -13,14 +14,14 @@ const getData = async () => {
   return res.json();
 };
 
-const Hero = async() => {
-  const movie = await getData()
+const Hero = async () => {
+  const movie = await getData();
 
   return (
     <section
-    style={{
-      backgroundImage: `url(${movie.heroImg})`,
-    }}
+      style={{
+        backgroundImage: `url(${movie.heroImg})`,
+      }}
       className="rounded-lg aspect-square md:aspect-[3/1] overflow-hidden bg-cover bg-center"
     >
       <div className="w-[40%] h-[100%] px-[20px] py-0 flex flex-col justify-center gap-5 bg-gradient-to-r from-black to-transparent">
@@ -34,10 +35,7 @@ const Hero = async() => {
           {truncateText(movie.synopsis, 200)}
         </p>
         <div className="flex items-center gap-2">
-          <Button className="flex items-center gap-3 cursor-pointer bg-green-700 text-white">
-            <Download />
-            Télécharger
-          </Button>
+          <DownloadButton link={movie.file}/>
           <Link href={`/movies/${movie.slug}`}>
             <Button className="flex items-center gap-3 cursor-pointer">
               <Info />
@@ -48,6 +46,6 @@ const Hero = async() => {
       </div>
     </section>
   );
-}
+};
 
 export default Hero;

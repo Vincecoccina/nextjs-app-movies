@@ -47,10 +47,10 @@ const Home = async () => {
 
         {/* Movie List Section */}
         <section className="mt-[50px]">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between mb-6">
             <div className="h-[50px] flex items center gap-3">
               <div className="h-[100] w-1 bg-blue-900"></div>
-              <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3 capitalize">
+              <h3 className="text-[30px] font-bold text-black dark:text-slate-300 capitalize">
                 Les derniers films ajoutés
               </h3>
             </div>

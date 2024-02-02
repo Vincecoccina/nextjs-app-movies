@@ -35,10 +35,7 @@ export default function ProfileButton() {
                 <AvatarFallback>{data?.user?.name}</AvatarFallback>
               </Avatar>
             </DropdownMenuTrigger>
-            <DropdownMenuContent>
-              <DropdownMenuItem>Mon Compte</DropdownMenuItem>
-              <DropdownMenuItem>Mon abonnement</DropdownMenuItem>
-              <DropdownMenuItem>Souscrire</DropdownMenuItem>
+            <DropdownMenuContent className="flex flex-col justify-center items-center">
               <DropdownMenuItem>
                 <Button variant="destructive" onClick={() => signOut()}>
                   Se deconnecter
