@@ -20,8 +20,7 @@ export default function NewMovies() {
         <section>
           <div className="flex items-center gap-6 mb-6">
             <div className="h-[50px] flex items center gap-3">
-              <div className="h-[100] w-1 bg-blue-900"></div>
-              <h1 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3 capitalize">
+              <h1 className="text-[22px] font-bold text-black dark:dark:text-gray-100 mb-3 capitalize italic">
                 Nouveautés
               </h1>
             </div>

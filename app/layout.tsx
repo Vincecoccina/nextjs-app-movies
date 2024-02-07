@@ -25,7 +25,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <QueryProvider>
           <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
               <div className="flex flex-col justify-between min-h-screen">
                 <Navbar />
                 <div className="flex-grow">{children}</div>

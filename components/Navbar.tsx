@@ -27,10 +27,8 @@ export default function Navbar() {
             <ToggleTheme />
             <Link
               href="/"
-              className="flex items-center gap-1 border-[2px] border-yellow-300 dark:border-teal-400 rounded-[30px] py-2 px-4 text-[12px] text-slate-700 dark:text-amber-200 font-semibold"
+              className="flex items-center gap-1 rounded-[30px] py-2 px-4 text-[15px] text-slate-700 dark:text-white font-semibold bg-cyan-600 uppercase"
             >
-              <CreditCard size={20}/>
-              <Bitcoin size={20}/>
               Faire un don
             </Link>
 
