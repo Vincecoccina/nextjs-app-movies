@@ -1,7 +1,7 @@
 import Hero from "@/components/Hero";
 import MovieList from "@/components/MovieList";
 import PageContainer from "@/components/PageContainer";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import Link from "next/link";
 import { Category } from "@prisma/client";
 
@@ -34,22 +34,33 @@ const Home = async () => {
           <h2 className="text-[35px] font-semibold">
             Des centaines de films à télécharger en torrent
           </h2>
-          <p className="w-[50%] mx-auto text-[13px] text-gray-400 italic">Bienvenue sur uncutvidéo.fr, ici vous pourrez télécharger plein de films en bonne qualité.</p>
+          <p className="w-[50%] mx-auto text-[13px] text-gray-400 italic">
+            Bienvenue sur uncutvidéo.fr, ici vous pourrez télécharger plein de
+            films en bonne qualité.
+          </p>
         </section>
         {/* Categories Section */}
         <section className="flex flex-col mt-7">
-          <h2 className="text-center text-[25px] font-semibold">Catégories <span className="text-cyan-600">Uncut Vidéo</span></h2>
+          <h2 className="text-center text-[25px] font-semibold">
+            Catégories <span className="text-cyan-600">Uncut Vidéo</span>
+          </h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 my-5">
             {categories?.map((category: Category) => (
-              <Button
-                variant="outline"
-                className="border-black dark:border-white rounded-[20px] px-5"
+              <Link
+                href={`categories/${category.slug}`}
+                className="w-[250px] h-[300px]"
                 key={category.id}
               >
-                <Link href={`categories/${category.slug}`}>
-                  {category.title}
-                </Link>
-              </Button>
+                <div className="relative h-[250px] w-full">
+                  <Image
+                    src={category.image || "/img/bg.jpg"}
+                    fill
+                    alt={category.title}
+                    className="rounded-lg object-cover transition-all duration-700 hover:scale-110"
+                  />
+                </div>
+                <p className="text-white text-center text-[20px] font-semibold">{category.title}</p>
+              </Link>
             ))}
           </div>
         </section>

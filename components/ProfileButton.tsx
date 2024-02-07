@@ -15,7 +15,7 @@ import { Button } from "./ui/button";
 
 export default function ProfileButton() {
   const { data, status } = useSession();
-  console.log(data);
+  
 
   return (
     <div className="flex items-center gap-3">
