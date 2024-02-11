@@ -41,14 +41,14 @@ const Home = async () => {
         </section>
         {/* Categories Section */}
         <section className="flex flex-col mt-7">
-          <h2 className="text-center text-[25px] font-semibold">
+          <h2 className="text-center text-[25px] font-bold">
             Catégories <span className="text-cyan-600">Uncut Vidéo</span>
           </h2>
           <div className="flex flex-col md:flex-row justify-center items-center gap-4 my-5">
             {categories?.map((category: Category) => (
               <Link
                 href={`categories/${category.slug}`}
-                className="w-[250px] h-[300px]"
+                className="w-[250px] h-[300px] transition-all duration-700 hover:scale-110"
                 key={category.id}
               >
                 <div className="relative h-[250px] w-full">
@@ -56,10 +56,10 @@ const Home = async () => {
                     src={category.image || "/img/bg.jpg"}
                     fill
                     alt={category.title}
-                    className="rounded-lg object-cover transition-all duration-700 hover:scale-110"
+                    className="rounded-lg object-cover filter brightness-120"
                   />
                 </div>
-                <p className="text-white text-center text-[20px] font-semibold">{category.title}</p>
+                <p className="text-black dark:text-white text-center text-[20px] font-semibold">{category.title}</p>
               </Link>
             ))}
           </div>

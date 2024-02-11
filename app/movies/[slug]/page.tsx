@@ -74,7 +74,6 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           <div className="flex justify-between items-start p-3 mb-3">
             <div className="flex flex-col justify-center gap-1 w-[80%] md:w-[50%]">
               <div className="h-[50px] flex items center gap-3 mb-3">
-                <div className="h-[100] w-1 bg-blue-900"></div>
                 <h3 className="text-[30px] font-bold text-black dark:text-slate-300 mb-3">
                   Infos
                 </h3>
@@ -124,7 +123,6 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
           <div className="flex flex-col items-center lg:items-start lg:flex-row">
             <div className="flex-1 text-start">
               <div className="h-[50px] flex items center gap-3 mb-5">
-                <div className="h-[100] w-1 bg-blue-900"></div>
                 <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                   Synopsis
                 </h3>
@@ -136,7 +134,6 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             {movie.trailer && (
               <div className="w-[100%] lg:w-[30%]">
                 <div className="h-[50px] flex items center gap-3 mb-5">
-                  <div className="h-[100] w-1 bg-blue-900"></div>
                   <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                     Bande Annonce
                   </h3>
@@ -160,7 +157,6 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             {movie.review && (
               <div className="flex-1 text-start py-5">
                 <div className="h-[50px] flex items center gap-3 mb-5">
-                  <div className="h-[100] w-1 bg-blue-900"></div>
                   <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                     L'avis d'Uncut
                   </h3>
@@ -174,13 +170,12 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             {movie.review && (
               <div className="mt-5 w-[100%] lg:w-[30%]">
                 <div className="h-[50px] flex items center gap-3 mb-5">
-                  <div className="h-[100] w-1 bg-blue-900"></div>
                   <h3 className="text-[30px] font-bold text-black dark:text-slate-300">
                     Note
                   </h3>
                 </div>
-                <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px] rounded-lg bg-slate-300">
-                  <span className="text-[80px] text-[#333] font-light">{`${movie.rate} / 10`}</span>
+                <div className="flex items-center justify-center aspect-square md:w-[100%] md:h-[315px] rounded-lg">
+                  <span className="text-[80px] text-white font-light">{`${movie.rate} / 10`}</span>
                 </div>
               </div>
             )}

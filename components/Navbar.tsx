@@ -26,7 +26,7 @@ export default function Navbar() {
           <div className="flex items-center gap-3">
             <ToggleTheme />
             <Link
-              href="/"
+              href="/donate"
               className="flex items-center gap-1 rounded-[30px] py-2 px-4 text-[15px] text-slate-700 dark:text-white font-semibold bg-cyan-600 uppercase"
             >
               Faire un don

@@ -33,6 +33,9 @@ export const GET = async (req: Request) => {
         ...(catSlug && catSlug != "null" && catSlug != "" && { catSlug }),
         ...visibilityCondition,
       },
+      orderBy: {
+        createdAt: 'desc',
+      },
       ...(limit !== undefined ? { take: limit } : {}),
       include: {
         cat: true,
