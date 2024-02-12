@@ -1,13 +1,28 @@
 "use client";
 
 import React, { useState, SyntheticEvent } from "react";
+import {
+  useContract,
+  useAddress,
+  useConnect,
+  metamaskWallet,
+} from "@thirdweb-dev/react";
+import { ethers } from "ethers";
 import getStripe from "@/lib/getStripe";
 import { Button } from "@/components/ui/button";
 import { CreditCard, Wallet } from "lucide-react";
 
+
 export default function page() {
   const [amount, setAmount] = useState(0);
+  const [amountETH, setAmountETH] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const address = useAddress();
+  const { contract } = useContract(
+    "0xE1f44c75dE6EA2a781ed4f32575742f48D2054EC"
+  );
+  const connect = useConnect();
+  const walletConfig = metamaskWallet();
 
   const handleDonation = async (e: SyntheticEvent) => {
     e.preventDefault();
@@ -38,6 +53,42 @@ export default function page() {
     }
   };
 
+  const handleConnectWallet = async () => {
+    try {
+      await connect(walletConfig);
+      console.log("Wallet connecté");
+    } catch (error) {
+      console.error("Échec de la connexion du wallet", error);
+    }
+  };
+
+  const handleEthDonation = async (e: SyntheticEvent) => {
+    e.preventDefault();
+    setIsLoading(true);
+  
+    try {
+      if (!contract) {
+        console.log("Contract non chargé");
+        setIsLoading(false);
+        return;
+      }
+     
+      if (!amountETH) {
+        console.log("Montant non spécifié");
+        setIsLoading(false);
+        return;
+      }
+      const amountInWei = ethers.utils.parseEther(amountETH.toString());
+      await contract.call("donate", [], { value: amountInWei });
+      alert("Donation en ETH réussie!");
+    } catch (error) {
+      console.error("Erreur lors de la donation en ETH:", error);
+      alert("Erreur lors de la donation.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <main>
       <section className="flex flex-col items-center justify-center mt-6">
@@ -56,8 +107,10 @@ export default function page() {
               <input
                 type="text"
                 pattern="[0-9]*[.,]?[0-9]+"
-                placeholder="Entrez votre montant"
-                onChange={(e) => setAmount(parseFloat(e.target.value.replace(',', '.')))}
+                placeholder="Entrez votre montant en €"
+                onChange={(e) =>
+                  setAmount(parseFloat(e.target.value.replace(",", ".")))
+                }
                 className="py-2 text-center"
                 min="0"
               />
@@ -73,10 +126,40 @@ export default function page() {
           <h3 className="font-semibold text-[20px] uppercase italic">
             Faire un don en crytomonnaie
           </h3>
-          <Button className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-700 to-pink-600 text-white hover:bg-cyan-400 uppercase font-semibold w-[70%]">
-            <Wallet />
-            Connectez votre wallet
-          </Button>
+          {!address ? (
+            <Button
+              className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-700 to-pink-600  text-white hover:bg-cyan-400 uppercase font-semibold w-[70%]"
+              onClick={handleConnectWallet}
+            >
+              Connecter Wallet
+            </Button>
+          ) : (
+            <div
+              className="flex items-center justify-center gap-2 bg-slate-200 text-black uppercase font-semibold w-[70%] h-[70px] rounded-none"
+            >
+              {`${address.substring(0, 8)}...${address.substring(address.length - 4)}`}
+            </div>
+          )}
+          {address && (
+            <form onSubmit={handleEthDonation} className="w-[70%]">
+              <div className="flex flex-col gap-4">
+                <input
+                  type="text"
+                  pattern="[0-9]*[.,]?[0-9]+"
+                  placeholder="Entrez votre montant en ETH"
+                  className="py-2 text-center"
+                  onChange={(e) =>
+                    setAmountETH(parseFloat(e.target.value.replace(",", ".")))
+                  }
+                  min="0"
+                />
+                <Button className="flex items-center gap-2 bg-gradient-to-r from-fuchsia-700 to-pink-600  text-white hover:bg-cyan-400 uppercase font-semibold">
+                  <Wallet />
+                  Donner
+                </Button>
+              </div>
+            </form>
+          )}
         </div>
       </section>
     </main>

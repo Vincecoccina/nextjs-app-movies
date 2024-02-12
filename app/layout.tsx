@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ThemeProvider from "@/providers/ThemeProvider";
 import QueryProvider from "@/providers/QueryProvider";
+import Web3Provider from "@/providers/ThirdWebProvider";
 import "./globals.css";
 import AuthProvider from "@/providers/AuthProvider";
 
@@ -23,17 +24,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <QueryProvider>
-          <AuthProvider>
-            <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              <div className="flex flex-col justify-between min-h-screen">
-                <Navbar />
-                <div className="flex-grow">{children}</div>
-                <Footer />
-              </div>
-            </ThemeProvider>
-          </AuthProvider>
-        </QueryProvider>
+        <Web3Provider>
+          <QueryProvider>
+            <AuthProvider>
+              <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                <div className="flex flex-col justify-between min-h-screen">
+                  <Navbar />
+                  <div className="flex-grow">{children}</div>
+                  <Footer />
+                </div>
+              </ThemeProvider>
+            </AuthProvider>
+          </QueryProvider>
+        </Web3Provider>
       </body>
     </html>
   );
