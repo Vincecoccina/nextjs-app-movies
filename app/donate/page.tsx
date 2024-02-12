@@ -18,9 +18,7 @@ export default function page() {
   const [amountETH, setAmountETH] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const address = useAddress();
-  const { contract } = useContract(
-    "0xE1f44c75dE6EA2a781ed4f32575742f48D2054EC"
-  );
+  const { contract } = useContract(process.env.NEXT_PUBLIC_CONTRAT_ADDRESS);
   const connect = useConnect();
   const walletConfig = metamaskWallet();
 
