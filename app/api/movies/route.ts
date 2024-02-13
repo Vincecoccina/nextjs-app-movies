@@ -8,12 +8,13 @@ export const GET = async (req: Request) => {
     const catSlug = searchParams.get("cat");
     const limitParam = searchParams.get("limit");
     const visibilityParam = searchParams.get("visibility");
+    const pageParam = searchParams.get("page");
 
-    let limit: number | undefined = 20;
-    if (limitParam && limitParam === "all") {
-      limit = undefined;
-    } else if (limitParam) {
-      limit = parseInt(limitParam, 10);
+    const limit: number = 20;
+
+    let page: number = 1;
+    if (pageParam) {
+      page = parseInt(pageParam, 10);
     }
 
     let visibilityCondition: any;
@@ -21,27 +22,37 @@ export const GET = async (req: Request) => {
       const visibility = parseInt(visibilityParam, 10);
       visibilityCondition = { visibility };
     } else {
-      // Par défaut, inclure les films avec une visibilité de 0 et 1
       visibilityCondition = {
         OR: [{ visibility: 0 }, { visibility: 1 }]
       };
     }
 
+    const count = await prisma.movie.count({
+      where: {
+        ...(catSlug && catSlug !== "null" && catSlug !== "" && { catSlug }),
+        ...visibilityCondition,
+      },
+    });
+
+    // Calculer le nombre d'éléments à sauter pour la pagination
+    const skip = (page - 1) * limit;
 
     const movies = await prisma.movie.findMany({
       where: {
-        ...(catSlug && catSlug != "null" && catSlug != "" && { catSlug }),
+        ...(catSlug && catSlug !== "null" && catSlug !== "" && { catSlug }),
         ...visibilityCondition,
       },
       orderBy: {
         createdAt: 'desc',
       },
-      ...(limit !== undefined ? { take: limit } : {}),
+      skip: skip, 
+      take: limit,
       include: {
         cat: true,
       },
     });
-    return NextResponse.json(movies, { status: 200 });
+
+    return NextResponse.json({movies, count: count}, { status: 200 });
   } catch (error) {
     return NextResponse.json(
       { error: "Something went wrong" },
@@ -49,6 +60,7 @@ export const GET = async (req: Request) => {
     );
   }
 };
+
 
 export const POST = async (req: Request) => {
   try {

@@ -8,11 +8,7 @@ import { useMovies } from "@/hooks/useMovies";
 export default function NewMovies() {
   const searchParams = useSearchParams();
   const visibility = searchParams.get("visibility") || 0;
-  const { data: movies, isFetching } = useMovies(
-    null,
-    "all",
-    visibility as number
-  );
+  const { data, isFetching } = useMovies(null, "all", visibility as number, 1);
 
   return (
     <PageContainer>
@@ -25,8 +21,8 @@ export default function NewMovies() {
               </h1>
             </div>
           </div>
-          {!isFetching && movies.length > 0 ? (
-            <MovieList movies={movies} />
+          {!isFetching && data?.movies.length > 0 ? (
+            <MovieList movies={data?.movies} />
           ) : (
             <p className="text-center text-[30px]">Aucun films</p>
           )}

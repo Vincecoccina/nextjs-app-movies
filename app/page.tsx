@@ -22,7 +22,7 @@ const getCategories = async () => {
 };
 
 const Home = async () => {
-  const movies = await getData();
+  const {movies} = await getData();
   const categories = await getCategories();
 
   return (
