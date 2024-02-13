@@ -19,13 +19,25 @@ const getData = async (slug: string) => {
   return res.json();
 };
 
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const { slug } = params;
+
+  return {
+    title: `Uncut - Tout nos films dans la catégorie ${formatSlug(slug)}`,
+    description: `Le catalogue complet d'uncut vidéo dans la catégorie ${formatSlug(slug)}`,
+  };
+}
+
 const categoryPage = async ({ params }: Props) => {
   const { slug } = params;
-  const movies = await getData(slug);
+  const {movies, count} = await getData(slug);
 
   return (
     <>
-      <title>{`Uncut - Catégorie ${formatSlug(slug)}`}</title>
       <PageContainer>
         <main className="py-10 px-4">
           <div className="flex items-center gap-6 mb-6">
@@ -33,7 +45,7 @@ const categoryPage = async ({ params }: Props) => {
               {formatSlug(slug)}
             </h1>
             <Badge className="text-white text-[14px] font-bold bg-cyan-600">
-              {movies.length}
+              {count}
             </Badge>
           </div>
           <MovieList movies={movies} />

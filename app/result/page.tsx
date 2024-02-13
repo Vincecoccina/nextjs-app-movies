@@ -19,8 +19,7 @@ export default function ResultPage() {
     <PageContainer>
         <main className="py-10 px-4">
         <div className="h-[50px] flex items center gap-3 mb-5">
-            <div className="h-[100] w-1 bg-blue-900"></div>
-            <h1 className="text-[30px] font-semibold text-black dark:text-slate-300 capitalize">
+            <h1 className="text-[25px] font-semibold text-black dark:text-slate-300 capitalize italic">
               {formatSlug(search as string)}
             </h1>
           </div>
