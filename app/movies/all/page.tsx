@@ -88,11 +88,9 @@ const AllMovies = () => {
             <h1 className="text-[22px] font-bold text-black dark:text-gray-100 capitalize italic">
               Le catalogue Uncut vidéo
             </h1>
-      
               <Badge className="text-white text-[14px] font-bold bg-cyan-600">
                 {count}
               </Badge>
-          
           </div>
           <MovieList movies={movies} />
         </section>

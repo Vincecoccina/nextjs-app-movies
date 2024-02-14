@@ -6,8 +6,8 @@ import { Badge } from "@/components/ui/badge";
 import Comments from "@/components/Comments";
 import MovieSuggest from "@/components/MovieSuggest";
 import DownloadButton from "@/components/DownloadButton";
-
-
+import Image from "next/image";
+import { truncateText } from "@/utils/TruncateText";
 
 const getData = async (slug: string) => {
   const res = await fetch(`${process.env.URL}/api/movies/${slug}`, {
@@ -52,19 +52,11 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
             <h1 className="text-[30px] sm:text-[50px] font-semibold text-white md:whitespace-nowrap capitalize">
               {movie.title}
             </h1>
-            <Badge
-              className={`absolute top-[50%] mt-3 ${
-                movie.warning === "Interdit aux moins de 16 ans"
-                  ? "bg-red-600"
-                  : movie.warning === "Interdit aux moins de 12 ans"
-                  ? "bg-orange-600"
-                  : "bg-green-600"
-              } text-white`}
-            >
-              {movie.warning}
-            </Badge>
+            <p className="text-[17px] text-slate-300">
+              {truncateText(movie?.synopsis, 200)}
+            </p>
             <div className="mt-[50px]">
-              <DownloadButton link={movie.file}/>
+              <DownloadButton link={movie.file} />
             </div>
           </div>
         </section>
@@ -78,32 +70,46 @@ const SingleMoviePage = async ({ params }: { params: { slug: string } }) => {
                   Infos
                 </h3>
               </div>
-              <div className="flex flex-col gap-3 text-[#333] dark:text-slate-400 font-bold">
-                <p>
-                  Année :{" "}
-                  <span className="text-blue-500 font-light">{movie.year}</span>
-                </p>
-                <Separator />
-                <p>
-                  Pays :{" "}
-                  <span className="text-blue-500 font-light">
-                    {movie.country}
-                  </span>
-                </p>
-                <Separator />
-                <p>
-                  De :{" "}
-                  <span className="text-blue-500 font-light">
-                    {movie.director}
-                  </span>
-                </p>
-                <Separator />
-                <p>
-                  Avec :{" "}
-                  <span className="text-blue-500 font-light">
-                    {movie.casting}
-                  </span>
-                </p>
+              <div className="flex gap-6">
+                <div className="h-[240px] w-[170px]">
+                  <Image
+                    className="rounded-sm h-[100%] w-[100%]"
+                    src={movie.coverImg}
+                    width={200}
+                    height={200}
+                    alt={movie.title}
+                  />
+                </div>
+                <div className="flex flex-col gap-3 text-[#333] dark:text-slate-400 font-bold">
+                  <p
+                    className={`${
+                      movie.warning === "Interdit aux moins de 16 ans"
+                        ? "text-red-500"
+                        : movie.warning === "Interdit aux moins de 12 ans"
+                        ? "text-orange-500" 
+                        : "text-green-600"
+                    }`}
+                  >
+                    {movie.warning}
+                  </p>
+                  <p>
+                    Année : <span className="text-cyan-500">{movie.year}</span>
+                  </p>
+                  <Separator />
+                  <p>
+                    Pays :{" "}
+                    <span className="text-cyan-500">{movie.country}</span>
+                  </p>
+                  <Separator />
+                  <p>
+                    De : <span className="text-cyan-500">{movie.director}</span>
+                  </p>
+                  <Separator />
+                  <p>
+                    Avec :{" "}
+                    <span className="text-cyan-500">{movie.casting}</span>
+                  </p>
+                </div>
               </div>
             </div>
             <div className="flex gap-2">

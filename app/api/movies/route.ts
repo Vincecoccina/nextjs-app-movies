@@ -10,7 +10,7 @@ export const GET = async (req: Request) => {
     const visibilityParam = searchParams.get("visibility");
     const pageParam = searchParams.get("page");
 
-    const limit: number = 20;
+    const limit: number = 12;
 
     let page: number = 1;
     if (pageParam) {
